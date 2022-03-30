@@ -65,9 +65,11 @@ public class Main {
         String answer= input.next();
         switch (answer){
             case "Y":
+            case "y":
                 System.out.println("Exiting.....");
                 System.exit(1);
             case "N":
+            case "n":
                 return;
             default:
                 System.out.println("Invalid input");
