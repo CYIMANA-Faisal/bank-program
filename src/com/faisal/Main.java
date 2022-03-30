@@ -1,5 +1,9 @@
 package com.faisal;
 
+import java.io.BufferedReader;
+import java.io.Console;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Main {
@@ -7,18 +11,34 @@ public class Main {
     public static Scanner ioObject = new Scanner(System.in);
     public static String accountHolder = "";
     public static double amount = 0;
+    public static String userPassword="";
     public static int accountNumber;
     public static String previousTransactions;
 
     public static void createAccount(){
+
         System.out.println("Enter your name to create account: ");
         accountHolder = ioObject.nextLine();
         accountNumber = (int)((Math.random() * 100000) + 20);
+        System.out.println("Enter the password you want to use: ");
+        userPassword=ioObject.nextLine();
         System.out.println("Hello " + accountHolder + "\nYour account number is: " + Integer.toString(accountNumber));
         System.out.println("-------------------------");
     }
+    public  static boolean validateUser(){
+
+        System.out.println("Enter your password: ");
+       String password=new Scanner(System.in).nextLine();
+     if(!password.equals(userPassword)){
+         System.out.println("Invalid password!");
+         return false;
+     }
+     return true;
+    }
+
 
     public static void withdraw(){
+
         System.out.println("How much do you want to withdraw? ");
         double amountToWithdraw = ioObject.nextDouble();
         if(amount < amountToWithdraw){
@@ -40,6 +60,7 @@ public class Main {
     }
 
     public static void deposit(){
+
         System.out.println("How much do you want to deposit? ");
         double amountToDeposit = ioObject.nextDouble();
         amount+=amountToDeposit;
@@ -49,6 +70,7 @@ public class Main {
     }
 
     static void printTransaction(){
+
         System.out.println("The previous transaction was " + previousTransactions);
         System.out.println("-------------------------");
     }
@@ -85,15 +107,23 @@ public class Main {
             int choice = ioObject.nextInt();
             switch (choice){
                 case 1:
+                    if(! validateUser())
+                        break;
                     deposit();
                     break;
                 case 2:
+                    if(! validateUser())
+                        break;
                     System.out.println("Your balance is: " + Double.toString(checkBalance()));
                     break;
                 case 3:
+                    if(! validateUser())
+                        break;
                     withdraw();
                     break;
                 case 4:
+                    if(! validateUser())
+                        break;
                     printTransaction();
                     break;
                 case 5:
